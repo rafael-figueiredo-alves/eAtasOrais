@@ -62,6 +62,18 @@ Type
     Function Listar (periodo: string; Lista: Tobject) : iControllerProfessores;
   end;
 
+  iControllerAtas = interface
+    ['{3B8A4736-79D1-4A8F-A5D6-62BB099BD843}']
+    Function Periodo (Value : String) : iControllerAtas;
+    function Alunos (Value : TStrings) : iControllerAtas;
+    function Conceitos (Value : TStrings) : iControllerAtas;
+    Function Examinador (Value : String) : iControllerAtas;
+    Function Turma (Value : string) : iControllerAtas;
+    Function Dias (Value : String) : iControllerAtas;
+    Function horario (Value : string) : iControllerAtas;
+    Function Gerar : Boolean;
+  end;
+
   iControllerFactory = interface
     ['{3CAFBD7C-9C8D-4D07-B206-D16D882A2959}']
     Function Configuracao : iControllerConfiguracao;
@@ -70,6 +82,7 @@ Type
     Function alunos       : iControllerAlunos;
     Function Funcoes      : iControllerFuncoes;
     Function Professores  : iControllerProfessores;
+    Function Atas         : iControllerAtas;
   end;
 
 implementation

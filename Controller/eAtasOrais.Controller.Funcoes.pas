@@ -34,11 +34,12 @@ end;
 
 function TControllerFuncoes.LimpaTela: iControllerFuncoes;
 begin
-    formprincipal.Turma.Text        := '';
-    formprincipal.Dias.Text         := '';
-    formprincipal.Horario.Text      := '';
-    formprincipal.Professor.Text    := '';
-    //formprincipal.examinador.Enabled     := false;
+    formprincipal.Turma.Text         := '';
+    formprincipal.Dias.Text          := '';
+    formprincipal.Horario.Text       := '';
+    formprincipal.Professor.Text     := '';
+    formprincipal.examinador.Enabled := false;
+    formprincipal.examinador.Text    := '';
     FormPrincipal.ListaAlunos.Items.Clear;
 end;
 

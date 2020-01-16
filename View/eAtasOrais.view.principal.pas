@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects, FMX.ListBox,
   FMX.Edit, FMX.SearchBox, FMX.Effects, FMX.MultiView, FMX.DateTimeCtrls,
-  FMX.ComboEdit, FMX.Filter.Effects, FMX.TabControl, FMX.Ani;
+  FMX.ComboEdit, FMX.Filter.Effects, FMX.TabControl, FMX.Ani, FMX.ScrollBox,
+  FMX.Memo;
 
 type
   TFormPrincipal = class(TForm)
@@ -135,6 +136,7 @@ type
     procedure BtGerarAtasClick(Sender: TObject);
     procedure AnimaMsgFechaFinish(Sender: TObject);
     procedure ExaminadorTyping(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FPeriodo    : string;
@@ -145,6 +147,8 @@ type
     FDias       : string;
     FHorario    : string;
     FProfessor  : string;
+    FAlunos     : TStrings;
+    FConceitos  : TStrings;
     Procedure ExibeSobre;
   public
     { Public declarations }
@@ -171,18 +175,24 @@ begin
 end;
 
 procedure TFormPrincipal.BtGerarAtasClick(Sender: TObject);
+var i : integer;
 begin
-{    TControllerFactory.New.RAMs
-                       .Dias(FDias)
-                       .Turma(FTurma)
-                       .Media(media.Selected.Text)
-                       .Professor(FProfessor)
-                       .Horario(FHorario)
-                       .Meses(FMeses)
-                       .Periodo(FPeriodo)
-                       .licoes(FLicoes)
-                       .Alunos(ListaAlunos.Items)
-                       .Gerar;}
+    FAlunos.Clear;
+    FConceitos.Clear;
+    for I := 0 to ListaAlunos.Items.Count-1 do
+     begin
+      Falunos.Add(ListaAlunos.ListItems[i].ItemData.Text);
+      FConceitos.Add(listaalunos.ListItems[i].ItemData.Detail);
+     end;
+    TControllerFactory.New.Atas
+                               .Periodo(FPeriodo)
+                               .Alunos(Falunos)
+                               .Conceitos(FConceitos)
+                               .Examinador(FProfessor)
+                               .Dias(Dias.Text)
+                               .horario(Horario.Text)
+                               .Turma(FTurma)
+                               .Gerar;
 end;
 
 procedure TFormPrincipal.BtRefreshAlunosClick(Sender: TObject);
@@ -242,11 +252,19 @@ end;
 
 procedure TFormPrincipal.FormCreate(Sender: TObject);
 begin
+    FAlunos := TStringList.Create;
+    FConceitos := TStringList.Create;
     formprincipal.BtRefreshAlunos.Enabled := false;
     formprincipal.BtRefreshTurmas.Enabled := False;
     TControllerFactory.New.Funcoes.LimpaTela;
     ReportMemoryLeaksOnShutdown := true;
     TControllerFactory.New.Periodos.Listar(ComboPeriodo);
+end;
+
+procedure TFormPrincipal.FormDestroy(Sender: TObject);
+begin
+    FAlunos.DisposeOf;
+    FConceitos.DisposeOf;
 end;
 
 procedure TFormPrincipal.ImgPrincipalClick(Sender: TObject);
@@ -272,8 +290,7 @@ begin
     Examinador.Text      :=  FTurmas.Professor;
     Dias.Text            :=  FTurmas.DiasApresentar;
     BtRefreshAlunos.Enabled := true;
-    //TControllerFactory.New.Funcoes.DeterminarNumeroLicoes(FTurma);
-    //FLicoes := TControllerFactory.New.Funcoes.NumLicoes(Fturma);
+    Examinador.Enabled := True;
     TControllerFactory.New.alunos.Listar(fperiodo, fcod_cur, fnum_niv, fnum_tur, ListaAlunos);
     BtGerarAtas.Enabled := (ListaAlunos.Items.Count > 0);
 end;

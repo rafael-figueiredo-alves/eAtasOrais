@@ -3,7 +3,7 @@ unit eAtasOrais.Model.Interfaces;
 interface
 
 uses
-  FireDAC.Comp.Client, System.Classes, Data.DB;
+  FireDAC.Comp.Client, System.Classes, Data.DB, Generics.Collections, eAtasOrais.Model.ClasseAlunosConceitos;
 
 
 Type
@@ -42,10 +42,24 @@ Type
     Function TrocaBarra (Value : string) : string;
     Function RemoveParenteses (Value : string) : string;
     Function RemoveEspacosBrancos (Value : string) : string;
+    Function TrocaHoras (Value : string) : string;
     Function Mes (Value : integer) : string;
     Function FormataNomeAluno (Value : string) : string;
     Function FormataNomeProfessor (Value : string) : string;
     Function FormataNomeTurma (Value : string) : string;
+    Function FormataNomeTurma2 (value : string) : string;
+  end;
+
+  iModelAtas = interface
+    ['{131A003D-AF29-43D9-A3D4-722438203B89}']
+    Function Periodo (Value : String) : iModelAtas;
+    Function Alunos (Value : TStrings) : iModelAtas;
+    Function Conceitos (Value : TStrings) : iModelAtas;
+    Function Examinador (Value : String) : iModelAtas;
+    Function Turma (Value : string) : iModelAtas;
+    Function Dias (Value : String) : iModelAtas;
+    Function horario (Value : string) : iModelAtas;
+    Function Gerar : Boolean;
   end;
 
   iModelFactory = interface
@@ -53,9 +67,13 @@ Type
     Function Conexao      : iModelConexaoSOP;
     Function Configuracao : iModelConfiguracao;
     Function Funcoes      : iModelFuncoes;
+    Function Atas         : iModelAtas;
   end;
 
 
 implementation
+
+uses
+  System.Generics.Collections;
 
 end.

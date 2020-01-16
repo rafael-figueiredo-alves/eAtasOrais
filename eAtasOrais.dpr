@@ -19,7 +19,11 @@ uses
   eAtasOrais.Controller.Factory in 'Controller\eAtasOrais.Controller.Factory.pas',
   eAtasOrais.Model.Funcoes in 'Model\eAtasOrais.Model.Funcoes.pas',
   eAtasOrais.Controller.Funcoes in 'Controller\eAtasOrais.Controller.Funcoes.pas',
-  eAtasOrais.Controller.Professores in 'Controller\eAtasOrais.Controller.Professores.pas';
+  eAtasOrais.Controller.Professores in 'Controller\eAtasOrais.Controller.Professores.pas',
+  eAtasOrais.Model.ClasseAlunosConceitos in 'Model\eAtasOrais.Model.ClasseAlunosConceitos.pas',
+  eAtasOrais.Controller.Atas in 'Controller\eAtasOrais.Controller.Atas.pas',
+  eAtasOrais.Model.Atas in 'Model\eAtasOrais.Model.Atas.pas',
+  eAtasOrais.Model.Consts3 in 'Model\eAtasOrais.Model.Consts3.pas';
 
 {$R *.res}
 

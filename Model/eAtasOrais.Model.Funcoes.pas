@@ -15,11 +15,13 @@ Type
      Function RemoveAsterisco (Value : string) : string;
      Function TrocaBarra (Value : string) : string;
      Function RemoveParenteses (Value : string) : string;
+     Function TrocaHoras (Value : string) : string;
      Function RemoveEspacosBrancos (Value : string) : string;
      Function Mes (Value : integer) : string;
      Function FormataNomeAluno (Value : string) : string;
      Function FormataNomeProfessor (Value : string) : string;
-     Function FormataNomeTurma (Value : string) : string;
+     Function FormataNomeTurma  (Value : string) : string;
+     Function FormataNomeTurma2 (value : string) : string;
   End;
 
 implementation
@@ -59,6 +61,14 @@ begin
     Result := RemoveAsterisco(value);
     Result := RemoveParenteses(Result);
     Result := RemoveEspacosBrancos(Result);
+end;
+
+function TModelFuncoes.FormataNomeTurma2(value: string): string;
+begin
+    Result := RemoveAsterisco(value);
+    Result := RemoveParenteses(Result);
+    Result := RemoveEspacosBrancos(Result);
+    Result := TrocaBarra(Result);
 end;
 
 function TModelFuncoes.Mes(Value: integer): string;
@@ -118,6 +128,18 @@ begin
     begin
       if (value[i] = '/') or (value[i] = '\') then
        Result := Result + '-'
+      else
+       Result := Result + Value[i];
+    end;
+end;
+
+function TModelFuncoes.TrocaHoras(Value: string): string;
+var i : integer;
+begin
+   for I := Low(value) to High(value) do
+    begin
+      if (value[i] = ':') then
+       Result := Result + 'h'
       else
        Result := Result + Value[i];
     end;

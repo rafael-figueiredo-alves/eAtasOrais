@@ -18,6 +18,7 @@ Type
      Function alunos       : iControllerAlunos;
      Function Funcoes      : iControllerFuncoes;
      Function Professores  : iControllerProfessores;
+     Function Atas         : iControllerAtas;
   End;
 
 implementation
@@ -26,13 +27,18 @@ uses
   eAtasOrais.Controller.Alunos,
   eAtasOrais.Controller.configuracao, eAtasOrais.Controller.periodos,
   eAtasOrais.Controller.turmas, eAtasOrais.Controller.Funcoes,
-  eAtasOrais.Controller.Professores;
+  eAtasOrais.Controller.Professores, eAtasOrais.Controller.Atas;
 
 { TControllerFactory }
 
 function TControllerFactory.alunos: iControllerAlunos;
 begin
     Result := tControllerAlunos.New;
+end;
+
+function TControllerFactory.Atas: iControllerAtas;
+begin
+   Result := tControllerAtas.new;
 end;
 
 function TControllerFactory.Configuracao: iControllerConfiguracao;

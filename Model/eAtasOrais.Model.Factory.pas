@@ -15,6 +15,7 @@ Type
      Function Conexao : iModelConexaoSOP;
      Function Configuracao : iModelConfiguracao;
      Function Funcoes      : iModelFuncoes;
+     Function Atas         : iModelAtas;
   End;
 
 implementation
@@ -24,6 +25,11 @@ uses
   eAtasOrais.Model.Funcoes;
 
 { TModelFactory }
+
+function TModelFactory.Atas: iModelAtas;
+begin
+    //Result := TModelAtas.new;
+end;
 
 function TModelFactory.Conexao : iModelConexaoSOP;
 Var FTestes : Boolean;
